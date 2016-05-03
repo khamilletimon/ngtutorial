@@ -12,7 +12,7 @@
             <p ng-if="data.keyword">
                 Recent searched:
                 <em class="text-info">{{data.keyword}}</em>
-                <span class="glyphicon glyphicon-remove text-danger" style="cursor: pointer;"></span>
+                <span class="glyphicon glyphicon-remove text-danger" style="cursor: pointer;" ng-click="clearSearch()"></span>
             </p>
             <ul>
                 <li>AngularJS</li>
@@ -22,7 +22,7 @@
 
             <div ng-controller="SearchController">
                 <h3>Search now: </h3>
-                <form ng-submit="search()">
+                <form ng-submit="doSearch()">
                     <input type="text" ng-model="search.keyword" placeholder="Enter your keyword" />
                     <input type="submit" value="Search" />
                 </form>

@@ -1,0 +1,100 @@
+ul { list-style: none; padding-left: 0; }
+ul li { padding: 5px;}
+ul li span.glyphicon { opacity: 0; color: #ccc; font-size: 10px; }
+ul li:hover span.glyphicon { opacity: 1;}
+.hidden { display: none; }
+a:hover { text-decoration: none; }
+a { margin-left: 40px;}
+li .form-group a,
+li .form-group .form-control, 
+li .form-group button, 
+li .form-group span.glyphicon {
+    position: relative;
+    top: 5px;
+
+}
+li .form-group .form-control, .form-group button { height: 30px; }
+li .form-group button { line-height: 1; }
+.todoDone a { text-decoration: line-through;}
+.todoDone span.glyphicon {display: none;}
+.checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox label {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 300;
+    font-size: 14px;
+    padding-top: 6px;
+    padding-left: 40px;
+    position: relative;
+    white-space: nowrap;
+    color: #777;
+
+}
+
+.checkbox label span { font-size: 10px; opacity: 0; transition: all .1s ease; }
+.checkbox label:hover span { opacity: 1; }
+.checkbox label:before {
+    background-color: #d5d9e2;
+    bottom: 1px;
+    border: 0 none;
+    content: "\e013";
+    display: inline-block;
+    height: 30px;
+    left: 0;
+    margin-right: 10px;
+    position: absolute;
+    top: 2px;
+    width: 30px;
+    transition: all .1s ease;
+    font-family: 'Glyphicons Halflings';    
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+}
+.checkbox input[type="checkbox"]:checked + label{
+    color: #202020;
+}
+.todoDone .checkbox label:before  {
+    border: 0 none;
+    background-color: #1795e5; 
+    content: "\e013";
+    font-family: 'Glyphicons Halflings';                
+    color: #fff;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.add-top {
+    margin-top: 20px;
+}
+
+.add-bottom-3 {
+    margin-bottom: 30px;
+}
+
+.panel-body {
+    min-height: 213px;
+}
+
+.error-container{
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.error-container .alert{
+    margin-bottom: 0 !important;
+    padding: 10px;
+}
+
+.project-list li { border-radius: 5px; padding: 10px; }
+.project-list li a { margin-left: 0; }
+.project-list li a:active, .project-list li a:focus { text-decoration: none; }
+.project-list li:hover { background-color:  #467ce0;}
+.project-list li:hover a{ color: #fff;}
+.project-list li span.glyphicon { color: #ccc; opacity: 1; font-size: 18px; margin-right: 10px;}
+.project-list li:hover span.glyphicon { color: #fff;}

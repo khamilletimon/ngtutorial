@@ -1,0 +1,12 @@
+<div class="well well-lg">
+    <h1>{{todoDetailCtrl.todo.title}}</h1>
+    
+    <h4>Comments:</h4>
+    <ul>
+        <li ng-repeat="comment in todoDetailCtrl.todo.comments">
+           - <span ng-bind="comment.text"></span>
+        </li>
+    </ul>
+    
+    <a class="btn btn-primary add-top" href="#/project/{{todoDetailCtrl.todo.projectId}}" style="width: 150px;">Back</a> 
+</div>

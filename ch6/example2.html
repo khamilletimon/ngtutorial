@@ -6,17 +6,29 @@
 <body>
     <h3>Example of using filters in Controller</h3>
     <div ng-controller="HelloController">
-        <p>{{ data.message }}</p>
+        <p ng-bind="data.message"></p>
     </div>
     <script src="../libs/js/angular.js"></script>
     <script type="text/javascript">
         var app = angular.module("MyApp", []);
 
-        app.controller('HelloController', ['$scope', 'uppercaseFilter', HelloController]);
+        app.filter('trunc', function(){
+            return function(input, $limit) {
+                var limit = $limit || 15;           
+                if(input.length <=
+                        limit) {
+                    return input;
+                } else {
+                    return input.slice(0, limit) + "...";
+                }
+            };
+        });
 
-        function HelloController($scope, uppercaseFilter) {
+        app.controller('HelloController', ['$scope', '$filter', HelloController]);
+
+        function HelloController($scope, $filter) {
             $scope.data = {
-                message: uppercaseFilter("hello world")
+                message: $filter("trunc")("hello world wwwewewe", 20)
             };
         }
     </script>

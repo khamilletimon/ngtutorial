@@ -1,13 +1,9 @@
-function MainController(todos) {
+function TodoListController(todos, todoList) {
     var vm = this;
     var init;
     
     init = function() {
-        todos.getTodos().then(function(data){
-            vm.todos = data;
-        }, function(error){
-            console.log(error);
-        });
+        vm.todos = todoList;
     };
 
     vm.remove = function(todo) {
@@ -16,7 +12,6 @@ function MainController(todos) {
     
     vm.editTodo = function(todo) {
         vm.newTodo = angular.copy(todo);
-        console.log(vm.newTodo);
     };
     
     vm.cancelEdit = function() {
@@ -35,7 +30,7 @@ function MainController(todos) {
         if(!form.$dirty) {
             vm.cancelEdit();
         } else {
-            todos.updateTodo(todo, {id: vm.newTodo.id, name: vm.newTodo.name}).then(function(){
+            todos.updateTodo(todo, {id: vm.newTodo.id, title: vm.newTodo.title}).then(function(){
                 vm.cancelEdit();
             });
         }

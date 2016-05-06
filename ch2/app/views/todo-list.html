@@ -1,0 +1,82 @@
+
+<div class="col-md-12 add-bottom-3">
+    <div class="col-md-6">
+        <form class="form-inline" ng-submit="projectDetailCtrl.add(projectDetailCtrl.newtodo, form.$invalid, projectDetailCtrl.project.id)" name="form" novalidate autocomplete="off">
+            <div class="form-group" ng-class="{'has-error': (form.todo.$error.minlength || form.todo.$error.maxlength) && !form.todo.$error.required}">
+                <label for="newcolor">New todo: </label>
+                <input class="form-control" name="todo"  ng-minlength="5" ng-maxlength='50' type="text" id="newcolor" ng-model="projectDetailCtrl.newtodo" placeholder="New Todo" required />
+            </div>
+            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Add</button>
+        </form>
+    </div>
+    <div class="col-md-6
+         error-container ">
+        <div class="alert alert-danger" ng-show="form.todo.$error.minlength || form.todo.$error.maxlength">
+            <span style="color:red" ng-show="!form.todo.$error.required && form.todo.$error.minlength">Input must be more than 5 characters.</span>
+            <span style="color:red" ng-show="!form.todo.$error.required && form.todo.$error.maxlength">Input must be less than 50 characters.</span>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title">Todos:</h2>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="todo in projectDetailCtrl.project.todos track by $index"  ng-if="!todo.done">
+                        <form class="form-inline" name="editform" novalidate autocomplete="off" ng-submit="projectDetailCtrl.saveEdit(todo, editform)">
+                            <div class="form-group" ng-class="{'has-error': editform.$invalid, 'todoDone': todo.done}">
+                                <div class="checkbox">
+                                    <label for="checkbox_{{todo.id}}">
+                                        <input id="checkbox_{{todo.id}}" type="checkbox" ng-model="todo.done" ng-change="projectDetailCtrl.setAsDone(todo)" />
+                                    </label>
+                                </div>
+                                <a href="#/todo/{{todo.id}}"><span ng-bind="todo.title" ng-hide="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id"></span></a>
+                                <input autofocus focus-me="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id" class="form-control" type="text" name="edit_todo" 
+                                       ng-blur="projectDetailCtrl.saveEdit(todo, editform)" 
+                                       ng-show="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id" ng-model="projectDetailCtrl.newTodo.title" 
+                                       ng-keyup="$event.which == 27 && projectDetailCtrl.cancelEdit()"
+                                       required ng-minlength="5" ng-maxlength='50'/>
+                                <button ng-show="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id" type="submit" class="btn btn-primary" ng-disabled="editform.$invalid">Save</button>
+                                <button ng-show="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id" class="btn btn-danger" ng-click="projectDetailCtrl.cancelEdit()">Cancel</button>
+                                <span class="glyphicon glyphicon-pencil " style="cursor: pointer;" ng-click="projectDetailCtrl.editTodo(todo)" ng-hide="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id"></span>
+                                <span class="glyphicon glyphicon-remove text-danger" style="cursor: pointer;" ng-click="projectDetailCtrl.remove(todo)" ng-hide="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id"></span>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h2 class="panel-title">Done:</h2>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="todo in projectDetailCtrl.project.todos track by $index" ng-if="todo.done">
+                        <form class="form-inline" name="editform" novalidate autocomplete="off" ng-submit="projectDetailCtrl.saveEdit(todo, editform)">
+                            <div class="form-group" ng-class="{'has-error': editform.$invalid, 'todoDone': todo.done}">
+                                <div class="checkbox">
+                                    <label for="checkbox_{{todo.id}}">
+                                        <input id="checkbox_{{todo.id}}" type="checkbox" ng-model="todo.done" ng-change="projectDetailCtrl.setAsDone(todo)" />
+                                    </label>
+                                </div>
+                                <a href="#/todo/{{todo.id}}"><span ng-bind="todo.title" ng-hide="projectDetailCtrl.newTodo && projectDetailCtrl.newTodo.id === todo.id"></span></a>
+
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 add-bottom-3">
+        <a class="btn btn-primary add-top" href="#/" style="width: 150px;">Back</a>
+    </div>
+</div>    
+
+

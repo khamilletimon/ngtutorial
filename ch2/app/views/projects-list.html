@@ -1,0 +1,7 @@
+<div class="panel-body">
+    <ul>
+        <li ng-repeat="project in projectCtrl.projects track by $index"  >
+            <a href="#/project/{{project.id}}"><span ng-bind="project.name"></span></a>
+        </li>
+    </ul>
+</div>

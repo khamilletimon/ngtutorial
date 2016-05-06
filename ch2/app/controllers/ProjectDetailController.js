@@ -1,22 +1,20 @@
-function MainController(todos) {
+function ProjectDetailController(projects, todos, projectDetail, projectTodos) {
     var vm = this;
     var init;
     
     init = function() {
-        todos.getTodos().then(function(data){
-            vm.todos = data;
-        }, function(error){
-            console.log(error);
-        });
+        vm.project = projectDetail;
+        vm.project.todos = projectTodos;
     };
-
+    
     vm.remove = function(todo) {
-        todos.removeTodo(todo);
+        todos.removeTodo(todo).then(function(){
+            vm.project.todos.splice(vm.project.todos.indexOf(todo), 1);
+        });
     };
     
     vm.editTodo = function(todo) {
         vm.newTodo = angular.copy(todo);
-        console.log(vm.newTodo);
     };
     
     vm.cancelEdit = function() {
@@ -35,21 +33,23 @@ function MainController(todos) {
         if(!form.$dirty) {
             vm.cancelEdit();
         } else {
-            todos.updateTodo(todo, {id: vm.newTodo.id, name: vm.newTodo.name}).then(function(){
+            todos.updateTodo(todo, vm.newTodo).then(function(){
                 vm.cancelEdit();
             });
         }
         
     };
     
-    vm.add = function(todo, invalid) {
+    vm.add = function(todo, invalid, project_id) {
         if(invalid) {
             return false;
         }
-        todos.addTodo(todo).then(function(){
+        
+        todos.addTodo(todo, project_id).then(function(){
             vm.newtodo = "";
         });
     };
+    
     
     init();
 }
